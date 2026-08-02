@@ -33,7 +33,7 @@ MKA Port Identifier             : 1
 Interface Name                  : Te0/0/0/36
 CAK Name (CKN)                  : 01
 CA Authentication Mode          : PRIMARY-PSK
-Keychain                        : ci_1167089415573
+Keychain                        : TEST_KEY_CHAIN
 Member Identifier (MI)          : 18E4F35A89D20F806845095B
 Message Number (MN)             : 11471
 Authenticator                   : NO
@@ -54,7 +54,7 @@ SAK Retire Time                 : 0s (No Old SAK to retire)
 Time to SAK Rekey               : NA
 Time to exit suspension         : NA
 
-MKA Policy Name                 : ci_aesxpn256
+MKA Policy Name                 : TEST_MACSEC_POLICY
 Key Server Priority             : 16
 Delay Protection                : FALSE
 Replay Window Size              : 64
