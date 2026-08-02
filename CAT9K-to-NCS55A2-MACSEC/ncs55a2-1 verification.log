@@ -1,0 +1,158 @@
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#show macsec mka session 
+Sun Aug  2 01:56:56.972 UTC
+
+NODE: node0_0_CPU0
+===============================================================================================
+   Interface-Name        Local-TxSCI       #Peers   Status   Key-Server   PSK/EAP      CKN     
+===============================================================================================
+     Te0/0/0/36      94ae.f031.f024/0001     1      Secured      NO       PRIMARY      01      
+
+
+
+
+
+
+
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#show macsec mka session  detail 
+Sun Aug  2 01:56:59.731 UTC
+NODE: node0_0_CPU0
+
+
+MKA Detailed Status for MKA Session
+===================================
+Status: Secured - Secured MKA Session with MACsec
+
+Local Tx-SCI                    : 94ae.f031.f024/0001
+Local Tx-SSCI                   : 2
+Interface MAC Address           : 94ae.f031.f024
+MKA Port Identifier             : 1
+Interface Name                  : Te0/0/0/36
+CAK Name (CKN)                  : 01
+CA Authentication Mode          : PRIMARY-PSK
+Keychain                        : ci_1167089415573
+Member Identifier (MI)          : 18E4F35A89D20F806845095B
+Message Number (MN)             : 11471
+Authenticator                   : NO
+Key Server                      : NO
+MKA Cipher Suite                : AES-256-CMAC
+Configured MACSec Cipher Suite  : GCM-AES-XPN-256
+Key Distribution Mode           : SAK
+
+Latest SAK Status               : Rx & Tx
+Latest SAK AN                   : 0
+Latest SAK KI (KN)              : 40050096A1EC480E24B9BD7100000001 (1)
+Old SAK Status                  : FIRST-SAK
+Old SAK AN                      : 0
+Old SAK KI (KN)                 : FIRST-SAK (0)
+
+SAK Transmit Wait Time          : 0s (Not waiting for any peers to respond)
+SAK Retire Time                 : 0s (No Old SAK to retire)
+Time to SAK Rekey               : NA
+Time to exit suspension         : NA
+
+MKA Policy Name                 : ci_aesxpn256
+Key Server Priority             : 16
+Delay Protection                : FALSE
+Replay Window Size              : 64
+Include ICV Indicator           : FALSE
+Confidentiality Offset          : 0
+Algorithm Agility               : 80C201
+SAK Cipher Suite                : 0080C20001000004 (GCM-AES-XPN-256)
+MACsec Capability               : 3 (MACsec Integrity, Confidentiality, & Offset)
+MACsec Desired                  : YES
+
+# of MACsec Capable Live Peers           : 1
+# of MACsec Capable Live Peers Responded : 0
+
+Live Peer List:
+-------------------------------------------------------------------------------
+           MI                  MN             Rx-SCI          SSCI  KS-Priority 
+-------------------------------------------------------------------------------
+40050096A1EC480E24B9BD71     11475      f4db.e6cd.450d/0034    1        15      
+          
+Potential Peer List:
+-------------------------------------------------------------------------------
+           MI                  MN             Rx-SCI          SSCI  KS-Priority 
+-------------------------------------------------------------------------------
+
+Peers Status:
+ Last Tx MKPDU          : 2026 Aug 02 01:56:59.067
+ Peer Count             : 1
+
+ RxSCI                  : F4DBE6CD450D0034
+  MI                    : 40050096A1EC480E24B9BD71
+  Peer CAK              : Match
+  Latest Rx MKPDU       : 2026 Aug 02 01:56:58.407
+
+
+
+
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#show lacp te0/0/0/36 
+Sun Aug  2 01:58:03.132 UTC
+State: a - Port is marked as Aggregable.
+       s - Port is Synchronized with peer.
+       c - Port is marked as Collecting.
+       d - Port is marked as Distributing.
+       A - Device is in Active mode.
+       F - Device requests PDUs from the peer at fast rate.
+       D - Port is using default values for partner information.
+       E - Information about partner has expired.
+
+Bundle-Ether17
+
+  Port          (rate)  State    Port ID       Key    System ID
+  --------------------  -------- ------------- ------ ------------------------
+Local
+  Te0/0/0/36       30s  ascdAF-- 0x8000,0x0003 0x0011 0x8000,94-ae-f0-31-f0-dd
+   Partner          1s  ascdA--- 0x8000,0x012e 0x0016 0x8000,f4-db-e6-cd-44-e0
+
+  Port                  Receive    Period Selection  Mux       A Churn P Churn
+  --------------------  ---------- ------ ---------- --------- ------- -------
+Local
+  Te0/0/0/36            Current    Slow   Selected   Distrib   None    None   
+
+
+
+
+
+
+
+
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#
+RP/0/RP0/CPU0:55a2-1#show bundle be17 
+Sun Aug  2 01:59:15.436 UTC
+
+Bundle-Ether17
+  Status:                                    Up
+  Local links <active/standby/configured>:   1 / 0 / 1
+  Local bandwidth <effective/available>:     10000000 (10000000) kbps
+  MAC address (source):                      94ae.f031.f0da (Chassis pool)
+  Inter-chassis link:                        No
+  Minimum active links / bandwidth:          1 / 1 kbps
+  Maximum active links:                      64
+  Wait while timer:                          2000 ms
+  Load balancing:                            
+    Link order signaling:                    Not configured
+    Hash type:                               Default
+    Locality threshold:                      None
+  LACP:                                      Operational
+    Flap suppression timer:                  Off
+    Cisco extensions:                        Disabled
+    Non-revertive:                           Disabled
+  mLACP:                                     Not configured
+  IPv4 BFD:                                  Not configured
+  IPv6 BFD:                                  Not configured
+
+  Port                  Device           State        Port ID         B/W, kbps
+  --------------------  ---------------  -----------  --------------  ----------
+  Te0/0/0/36            Local            Active       0x8000, 0x0003    10000000
+      Link is Active

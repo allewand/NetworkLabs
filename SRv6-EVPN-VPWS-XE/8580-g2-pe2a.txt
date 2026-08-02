@@ -1,0 +1,33 @@
+l2vpn evpn
+ logging vpws vc-state
+ replication-type ingress
+ router-id Loopback0
+ segment-routing srv6 locator algo0
+
+
+interface Port-channel10
+ no ip address
+ evpn ethernet-segment 1
+  identifier type 3 system-mac aaaa.bbbb.cccc
+  redundancy all-active
+ lacp device-id aaaa.bbbb.0012
+ no shut
+ service instance 36 ethernet
+  encapsulation dot1q 36
+  rewrite ingress tag pop 1 symmetric
+ !
+
+interface TenGigabitEthernet0/1/2
+ description CE TEST Connection
+ no ip address
+ negotiation auto
+ no shut
+ cdp enable
+ channel-group 12 mode active
+
+
+l2vpn evpn instance 36 point-to-point
+ encapsulation srv6
+ vpws context vpws36
+  service target 36 source 36
+  member Port-channel12 service-instance 36

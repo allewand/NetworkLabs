@@ -1,0 +1,224 @@
+
+c9500-core#
+c9500-core#sh mka sessions        
+
+Total MKA Sessions....... 1
+      Secured Sessions... 1
+      Pending Sessions... 0
+
+====================================================================================================
+Interface      Local-TxSCI         Policy-Name      Inherited         Key-Server                                            
+Port-ID        Peer-RxSCI          MACsec-Peers     Status            CKN                                                   
+====================================================================================================
+Twe1/0/45      f4db.e6cd.450d/0034 TEST_MKA_POLICY   NO                YES                                                   
+52             94ae.f031.f024/0001 1                Secured           01                                                              
+
+c9500-core#sh mka sessions detail 
+
+MKA Detailed Status for MKA Session
+===================================
+Status: SECURED - Secured MKA Session with MACsec
+
+TX-SSCI.................. 1
+Local Tx-SCI............. f4db.e6cd.450d/0034
+Interface MAC Address.... f4db.e6cd.450d
+MKA Port Identifier...... 52
+Interface Name........... TwentyFiveGigE1/0/45
+Audit Session ID......... 
+CAK Name (CKN)........... 01
+Member Identifier (MI)... 40050096A1EC480E24B9BD71
+Message Number (MN)...... 1042
+EAP Role................. NA
+Key Server............... YES
+MKA Cipher Suite......... AES-256-CMAC
+
+Latest SAK Status........ Rx & Tx
+Latest SAK AN............ 0
+Latest SAK KI (KN)....... 40050096A1EC480E24B9BD7100000001 (1)
+Old SAK Status........... FIRST-SAK
+Old SAK AN............... 0
+Old SAK KI (KN).......... FIRST-SAK (0)
+
+SAK Transmit Wait Time... 0s (Not waiting for any peers to respond)
+SAK Retire Time.......... 0s (No Old SAK to retire)
+SAK Rekey Time........... 0s (SAK Rekey interval not applicable)
+
+MKA Policy Name.......... TEST_MKA_POLICY
+Key Server Priority...... 15
+Delay Protection......... NO
+Delay Protection Timer.......... 0s (Not enabled)
+
+Confidentiality Offset... 0
+Algorithm Agility........ 80C201
+SAK Rekey On Live Peer Loss........ NO
+Send Secure Announcement.. DISABLED
+SCI Based SSCI Computation.... YES
+SAK Cipher Suite......... 0080C20001000004 (GCM-AES-XPN-256)
+MACsec Capability........ 3 (MACsec Integrity, Confidentiality, & Offset)
+MACsec Desired........... YES
+
+# of MACsec Capable Live Peers............ 1
+# of MACsec Capable Live Peers Responded.. 1
+
+Live Peers List:
+  MI                        MN          Rx-SCI (Peer)        KS        RxSA          SSCI
+                                                             Priority  Installed
+  ---------------------------------------------------------------------------------------
+  18E4F35A89D20F806845095B  1039        94ae.f031.f024/0001  16        YES            2
+
+Potential Peers List:
+  MI                        MN          Rx-SCI (Peer)        KS        RxSA          SSCI
+                                                             Priority  Installed
+  ---------------------------------------------------------------------------------------
+
+c9500-core# 
+
+
+
+
+c9500-core#sh lacp 22 neighbor  detail 
+Flags:  S - Device is requesting Slow LACPDUs 
+        F - Device is requesting Fast LACPDUs
+        A - Device is in Active mode       P - Device is in Passive mode     
+
+Channel group 22 neighbors
+
+Partner's information:
+
+
+               Partner               Partner                    Partner
+Port           System ID             Port Number      Age       Flags
+Twe1/0/45      32768,94ae.f031.f0dd  0x3              10s        FA
+
+          LACP Partner         Partner         Partner
+          Port Priority        Oper Key        Port State
+          32768                0x11            0x3F
+
+          Port State Flags Decode:
+          Activity:   Timeout:   Aggregation:   Synchronization:
+          Active      Short      Short      Yes      Yes
+
+          Collecting:   Distributing:   Defaulted:   Expired:
+          Yes           Yes             No           No 
+c9500-core#
+c9500-core#
+c9500-core#
+c9500-core#
+c9500-core#show etherchannel 22 sum
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+        A - formed by Auto LAG
+
+
+Number of channel-groups in use: 3
+Number of aggregators:           3
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+22     Po22(SU)        LACP        Twe1/0/45(P)    
+
+c9500-core#show etherchannel 22    
+% Incomplete command.
+
+c9500-core#show etherchannel 22 de
+c9500-core#show etherchannel 22 detail 
+Group state = L2 
+Ports: 1   Maxports = 16
+Port-channels: 1 Max Port-channels = 16
+Protocol:   LACP
+Minimum Links: 0
+
+
+                Ports in the group:
+                -------------------
+Port: Twe1/0/45
+------------
+
+Port state    = Up Mstr Assoc In-Bndl 
+Channel group = 22          Mode = Active          Gcchange = -
+Port-channel  = Po22        GC   =   -             Pseudo port-channel = Po22
+Port index    = 0           Load = 0x00            Protocol =   LACP
+
+Flags:  S - Device is sending Slow LACPDUs   F - Device is sending fast LACPDUs.
+        A - Device is in active mode.        P - Device is in passive mode.
+
+Local information:
+                                LACP port    Admin     Oper    Port        Port
+Port          Flags   State     Priority     Key       Key     Number      State
+Twe1/0/45     SA      bndl      32768        0x16      0x16    0x12E       0x3D  
+
+ Partner's information:
+
+                     LACP port                      Admin  Oper   Port    Port
+Port          Flags  Priority  Dev ID          Age  key    Key    Number  State
+Twe1/0/45     FA     32768     94ae.f031.f0dd  21s  0x0    0x11   0x3     0x3F  
+
+Age of the port in the current state: 0d:00h:32m:53s
+
+                Port-channels in the group: 
+                ---------------------------
+
+Port-channel: Po22    (Primary Aggregator)
+
+------------
+
+Age of the Port-channel   = 0d:18h:14m:03s
+Logical slot/port   = 9/22          Number of ports = 1
+HotStandBy port = null 
+Port state          = Port-channel Ag-Inuse 
+Protocol            =   LACP
+Port security       = Disabled
+Fast-switchover     = disabled
+Fast-switchover Dampening = disabled
+
+Ports in the Port-channel: 
+
+Index   Load   Port        EC state        No of bits
+------+------+------+------------------+-----------
+  0     00     Twe1/0/45      Active             0
+          
+Time since last port bundled:    0d:00h:32m:53s     Twe1/0/45
+Time since last port Un-bundled: 0d:00h:33m:38s     Twe1/0/45
+
+c9500-core#  
+c9500-core#
+c9500-core#
+c9500-core#
+c9500-core#sh span
+c9500-core#sh spanning-tree vl 123
+
+VLAN0123
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    32891
+             Address     f4db.e6cd.44e0
+             This bridge is the root
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32891  (priority 32768 sys-id-ext 123)
+             Address     f4db.e6cd.44e0
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Po22                Desg FWD 2000      128.2110 P2p 
+
+
+
+
+c9500-core#ping 10.0.123.1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.123.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+
+
